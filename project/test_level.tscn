@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://bxtb2od64t4pc"]
+[gd_scene load_steps=9 format=3 uid="uid://bxtb2od64t4pc"]
 
 [ext_resource type="Script" path="res://test_level.gd" id="1_82nyy"]
 [ext_resource type="Texture2D" uid="uid://3aug1fw5oyqe" path="res://background/cloud1.png" id="2_6uipm"]
 [ext_resource type="PackedScene" uid="uid://darq8ocldvh5a" path="res://man/man.tscn" id="2_fpxae"]
 [ext_resource type="Texture2D" uid="uid://cfbybusxf248p" path="res://background/grass.png" id="2_k2p6x"]
 [ext_resource type="Script" path="res://ground.gd" id="3_ddgqr"]
+[ext_resource type="FontFile" uid="uid://dh5xmq1a0k42x" path="res://ui/LuckiestGuy-Regular.ttf" id="6_x3gg8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ic0t3"]
 size = Vector2(76, 73)
@@ -114,3 +115,39 @@ shape = SubResource("RectangleShape2D_rys32")
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(350, 350)
 position_smoothing_enabled = true
+
+[node name="ScoreFeedbackLayer" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
+visible = false
+
+[node name="ScoreLabel" type="Label" parent="ScoreFeedbackLayer"]
+unique_name_in_owner = true
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -169.0
+offset_right = 169.0
+offset_bottom = 76.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.537255, 0.368627, 0.254902, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("6_x3gg8")
+theme_override_font_sizes/font_size = 72
+text = "Distance: "
+horizontal_alignment = 1
+
+[node name="PlayAgainButton" type="Button" parent="ScoreFeedbackLayer"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -55.5
+offset_top = -31.0
+offset_right = 55.5
+grow_horizontal = 2
+grow_vertical = 0
+text = "Deliver Again"
+
+[connection signal="pressed" from="ScoreFeedbackLayer/PlayAgainButton" to="." method="_on_play_again_button_pressed"]

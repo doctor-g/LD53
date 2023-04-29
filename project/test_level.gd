@@ -51,6 +51,12 @@ func _on_package_sleeping_state_changed()->void:
 	if _package.sleeping:
 		var pixel_distance := _package.global_position.x - _man.global_position.x
 		var meters := pixel_distance / _pixels_per_meter
-		print("DISTANCE IS ", meters, "m")
+		%ScoreLabel.text = "Distance:\n%.2fm" % meters
+		
+		%ScoreFeedbackLayer.visible=true
 		
 		_package.sleeping_state_changed.disconnect(_on_package_sleeping_state_changed)
+
+
+func _on_play_again_button_pressed():
+	get_tree().change_scene_to_file("res://test_level.tscn")
