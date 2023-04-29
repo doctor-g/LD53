@@ -29,7 +29,7 @@ func _physics_process(delta:float):
 	if _dropped:
 		_camera.global_position.x = max(_CAMERA_MIN_X, _package.global_position.x)
 	
-	if Input.is_action_just_pressed("drop"):
+	if not _dropped and Input.is_action_just_pressed("drop"):
 		_dropped = true
 		_tween.stop()
 		_package.freeze = false

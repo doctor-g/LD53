@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://chpulnid3nuyd"]
+[gd_scene load_steps=4 format=3 uid="uid://chpulnid3nuyd"]
 
 [ext_resource type="Script" path="res://package/package.gd" id="1_w368e"]
+[ext_resource type="Texture2D" uid="uid://d4calkdm4kgq2" path="res://package/package.png" id="2_cc3op"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ic0t3"]
 size = Vector2(76, 73)
@@ -19,11 +20,10 @@ script = ExtResource("1_w368e")
 position = Vector2(38, 36.5)
 shape = SubResource("RectangleShape2D_ic0t3")
 
-[node name="ColorRect" type="ColorRect" parent="."]
-offset_right = 75.0
-offset_bottom = 74.0
-color = Color(0.537255, 0.368627, 0.254902, 1)
-
 [node name="GlassSound" type="AudioStreamPlayer" parent="."]
 
 [node name="HitSound" type="AudioStreamPlayer" parent="."]
+
+[node name="Package" type="Sprite2D" parent="."]
+position = Vector2(37, 38)
+texture = ExtResource("2_cc3op")
