@@ -1,12 +1,51 @@
-[gd_scene load_steps=5 format=3 uid="uid://dckgtaf01wjd0"]
+[gd_scene load_steps=9 format=3 uid="uid://dckgtaf01wjd0"]
 
 [ext_resource type="FontFile" uid="uid://dh5xmq1a0k42x" path="res://ui/LuckiestGuy-Regular.ttf" id="1_u608b"]
 [ext_resource type="Script" path="res://ui/title_screen.gd" id="2_05dc8"]
 [ext_resource type="AudioStream" uid="uid://bpp3n8puo7am0" path="res://ui/click.wav" id="3_vviqb"]
+[ext_resource type="Texture2D" uid="uid://cq6gi0ceog2xq" path="res://ui/face_promo.png" id="4_vkdmi"]
 
 [sub_resource type="Theme" id="Theme_u13ew"]
 default_font = ExtResource("1_u608b")
-default_font_size = 64
+default_font_size = 48
+Label/colors/font_outline_color = Color(0.537255, 0.368627, 0.254902, 1)
+Label/constants/outline_size = 3
+
+[sub_resource type="Animation" id="Animation_15oee"]
+resource_name = "move_camera_down"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera2D:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(2.46229, 2.46229),
+"update": 0,
+"values": [Vector2(350, 350), Vector2(350, 1050)]
+}
+
+[sub_resource type="Animation" id="Animation_a2hq2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera2D:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(350, 350)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3fdef"]
+_data = {
+"RESET": SubResource("Animation_a2hq2"),
+"move_camera_down": SubResource("Animation_15oee")
+}
 
 [node name="TitleScreen" type="Control"]
 layout_mode = 3
@@ -23,6 +62,7 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_bottom = 700.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.333333, 0.866667, 1, 1)
@@ -33,12 +73,13 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -268.0
-offset_top = 82.0
+offset_top = 772.0
 offset_right = 268.0
-offset_bottom = 149.0
+offset_bottom = 839.0
 grow_horizontal = 2
 theme_override_colors/font_outline_color = Color(0.537255, 0.368627, 0.254902, 1)
 theme_override_constants/outline_size = 15
+theme_override_font_sizes/font_size = 64
 text = "Mr. Delivery Man"
 
 [node name="PlayButton" type="Button" parent="."]
@@ -49,10 +90,10 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -286.0
-offset_top = -112.0
-offset_right = 286.0
-offset_bottom = -40.0
+offset_left = -281.0
+offset_top = 447.0
+offset_right = 291.0
+offset_bottom = 519.0
 grow_horizontal = 2
 grow_vertical = 0
 text = "Deliver a Package"
@@ -60,6 +101,69 @@ text = "Deliver a Package"
 [node name="ClickSound" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("3_vviqb")
+
+[node name="SillyJamGame" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -283.5
+offset_top = -32.0
+offset_right = 283.5
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Another Silly Jam Game"
+horizontal_alignment = 1
+
+[node name="SillyJamGame2" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -283.5
+offset_top = 212.0
+offset_right = 283.5
+offset_bottom = 276.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Tap or Click to Continue"
+horizontal_alignment = 1
+
+[node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2(350, 350)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_3fdef")
+}
+
+[node name="AboutLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -382.0
+offset_top = 597.0
+offset_right = 403.0
+offset_bottom = 701.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 24
+text = "©2023 Paul Gestwicki
+Made for Ludum Dare 53: Delivery
+https://github.com/doctor-g/LD53"
+horizontal_alignment = 1
+
+[node name="FacePromo" type="Sprite2D" parent="."]
+position = Vector2(363, 941)
+texture = ExtResource("4_vkdmi")
 
 [connection signal="button_down" from="PlayButton" to="." method="_on_play_button_button_down"]
 [connection signal="button_up" from="PlayButton" to="." method="_on_play_button_button_up"]
