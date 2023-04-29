@@ -1,10 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://bf3oxvy6rn7jn"]
+[gd_scene load_steps=6 format=3 uid="uid://bf3oxvy6rn7jn"]
 
 [ext_resource type="Script" path="res://test_level.gd" id="1_82nyy"]
 [ext_resource type="PackedScene" uid="uid://bbrdaqctans4l" path="res://man.tscn" id="2_vkguy"]
+[ext_resource type="Script" path="res://ground.gd" id="3_ddgqr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ic0t3"]
 size = Vector2(40, 40)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rys32"]
+size = Vector2(3000, 20)
 
 [node name="TestLevel" type="Node2D"]
 script = ExtResource("1_82nyy")
@@ -13,7 +17,7 @@ script = ExtResource("1_82nyy")
 position = Vector2(91, 469)
 
 [node name="Package" type="RigidBody2D" parent="."]
-position = Vector2(179, 404)
+position = Vector2(185, 386)
 freeze = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Package"]
@@ -23,3 +27,11 @@ shape = SubResource("RectangleShape2D_ic0t3")
 [node name="ColorRect" type="ColorRect" parent="Package"]
 offset_right = 40.0
 offset_bottom = 40.0
+
+[node name="Ground" type="StaticBody2D" parent="."]
+position = Vector2(572, 625)
+script = ExtResource("3_ddgqr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
+position = Vector2(3, -8)
+shape = SubResource("RectangleShape2D_rys32")
