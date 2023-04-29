@@ -1,0 +1,65 @@
+[gd_scene load_steps=5 format=3 uid="uid://dckgtaf01wjd0"]
+
+[ext_resource type="FontFile" uid="uid://dh5xmq1a0k42x" path="res://ui/LuckiestGuy-Regular.ttf" id="1_u608b"]
+[ext_resource type="Script" path="res://ui/title_screen.gd" id="2_05dc8"]
+[ext_resource type="AudioStream" uid="uid://bpp3n8puo7am0" path="res://ui/click.wav" id="3_vviqb"]
+
+[sub_resource type="Theme" id="Theme_u13ew"]
+default_font = ExtResource("1_u608b")
+default_font_size = 64
+
+[node name="TitleScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_u13ew")
+script = ExtResource("2_05dc8")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.333333, 0.866667, 1, 1)
+
+[node name="Logo" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -268.0
+offset_top = 82.0
+offset_right = 268.0
+offset_bottom = 149.0
+grow_horizontal = 2
+theme_override_colors/font_outline_color = Color(0.537255, 0.368627, 0.254902, 1)
+theme_override_constants/outline_size = 15
+text = "Mr. Delivery Man"
+
+[node name="PlayButton" type="Button" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -286.0
+offset_top = -112.0
+offset_right = 286.0
+offset_bottom = -40.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Deliver a Package"
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("3_vviqb")
+
+[connection signal="button_down" from="PlayButton" to="." method="_on_play_button_button_down"]
+[connection signal="button_up" from="PlayButton" to="." method="_on_play_button_button_up"]
