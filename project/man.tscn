@@ -1,0 +1,52 @@
+[gd_scene load_steps=5 format=3 uid="uid://bbrdaqctans4l"]
+
+[ext_resource type="Script" path="res://man.gd" id="1_3dvsb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2fkcw"]
+size = Vector2(20, 135)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ommkx"]
+size = Vector2(30, 17)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wu1ok"]
+size = Vector2(42, 41)
+
+[node name="Man" type="StaticBody2D"]
+script = ExtResource("1_3dvsb")
+
+[node name="Leg" type="RigidBody2D" parent="."]
+mass = 12.0
+
+[node name="ColorRect" type="ColorRect" parent="Leg"]
+offset_left = -10.0
+offset_top = 1.0
+offset_right = 9.0
+offset_bottom = 135.0
+
+[node name="ColorRect2" type="ColorRect" parent="Leg"]
+offset_left = -10.0
+offset_top = 120.0
+offset_right = 22.0
+offset_bottom = 135.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Leg"]
+position = Vector2(0, 66.5)
+shape = SubResource("RectangleShape2D_2fkcw")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Leg"]
+position = Vector2(6, 126.5)
+shape = SubResource("RectangleShape2D_ommkx")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -20.0
+offset_top = -35.0
+offset_right = 20.0
+offset_bottom = 5.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -14.5)
+shape = SubResource("RectangleShape2D_wu1ok")
+
+[node name="PinJoint2D" type="PinJoint2D" parent="."]
+node_a = NodePath("..")
+node_b = NodePath("../Leg")
