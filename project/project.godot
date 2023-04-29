@@ -28,6 +28,13 @@ drop={
 ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="man"
+2d_physics/layer_2="limiters"
+2d_physics/layer_3="package"
+2d_physics/layer_4="ground"
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"

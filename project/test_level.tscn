@@ -18,6 +18,8 @@ position = Vector2(91, 469)
 
 [node name="Package" type="RigidBody2D" parent="."]
 position = Vector2(185, 386)
+collision_layer = 4
+collision_mask = 13
 freeze = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Package"]
@@ -30,6 +32,8 @@ offset_bottom = 40.0
 
 [node name="Ground" type="StaticBody2D" parent="."]
 position = Vector2(572, 625)
+collision_layer = 8
+collision_mask = 4
 script = ExtResource("3_ddgqr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]

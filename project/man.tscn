@@ -17,6 +17,7 @@ size = Vector2(42, 41)
 script = ExtResource("1_3dvsb")
 
 [node name="Leg" type="RigidBody2D" parent="."]
+collision_mask = 7
 mass = 12.0
 
 [node name="ColorRect" type="ColorRect" parent="Leg"]
@@ -54,6 +55,7 @@ node_a = NodePath("..")
 node_b = NodePath("../Leg")
 
 [node name="RightLegLimiter" type="StaticBody2D" parent="."]
+collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RightLegLimiter"]
 position = Vector2(58, -29)
@@ -61,6 +63,7 @@ shape = SubResource("CircleShape2D_rfg6y")
 
 [node name="LeftLegLimiter" type="StaticBody2D" parent="."]
 position = Vector2(-135, 35)
+collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LeftLegLimiter"]
 position = Vector2(58, -29)
