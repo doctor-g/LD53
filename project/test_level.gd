@@ -51,8 +51,6 @@ func _physics_process(delta:float):
 
 func _on_package_sleeping_state_changed()->void:
 	if _package.sleeping:
-		$Polka.play()
-		
 		var pixel_distance := _package.global_position.x - _man.global_position.x
 		var meters := pixel_distance / _pixels_per_meter
 		%ScoreLabel.text = "Distance:\n%.2fm" % meters
@@ -60,6 +58,11 @@ func _on_package_sleeping_state_changed()->void:
 		%ScoreFeedbackLayer.visible=true
 		
 		_package.sleeping_state_changed.disconnect(_on_package_sleeping_state_changed)
+		
+		if meters < 1:
+			$Sad.play()
+		else:
+			$Polka.play()
 
 
 func _on_play_again_button_pressed():
