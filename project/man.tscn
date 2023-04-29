@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://bbrdaqctans4l"]
+[gd_scene load_steps=6 format=3 uid="uid://bbrdaqctans4l"]
 
 [ext_resource type="Script" path="res://man.gd" id="1_3dvsb"]
 
@@ -10,6 +10,8 @@ size = Vector2(30, 17)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wu1ok"]
 size = Vector2(42, 41)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rfg6y"]
 
 [node name="Man" type="StaticBody2D"]
 script = ExtResource("1_3dvsb")
@@ -50,3 +52,16 @@ shape = SubResource("RectangleShape2D_wu1ok")
 [node name="PinJoint2D" type="PinJoint2D" parent="."]
 node_a = NodePath("..")
 node_b = NodePath("../Leg")
+
+[node name="RightLegLimiter" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightLegLimiter"]
+position = Vector2(58, -29)
+shape = SubResource("CircleShape2D_rfg6y")
+
+[node name="LeftLegLimiter" type="StaticBody2D" parent="."]
+position = Vector2(-135, 35)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftLegLimiter"]
+position = Vector2(58, -29)
+shape = SubResource("CircleShape2D_rfg6y")
