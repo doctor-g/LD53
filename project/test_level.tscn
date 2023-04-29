@@ -1,7 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://bf3oxvy6rn7jn"]
+[gd_scene load_steps=8 format=3 uid="uid://bxtb2od64t4pc"]
 
 [ext_resource type="Script" path="res://test_level.gd" id="1_82nyy"]
+[ext_resource type="Texture2D" uid="uid://3aug1fw5oyqe" path="res://background/cloud1.png" id="2_6uipm"]
 [ext_resource type="PackedScene" uid="uid://darq8ocldvh5a" path="res://man/man.tscn" id="2_fpxae"]
+[ext_resource type="Texture2D" uid="uid://cfbybusxf248p" path="res://background/grass.png" id="2_k2p6x"]
 [ext_resource type="Script" path="res://ground.gd" id="3_ddgqr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ic0t3"]
@@ -12,6 +14,73 @@ size = Vector2(3000, 20)
 
 [node name="TestLevel" type="Node2D"]
 script = ExtResource("1_82nyy")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="SkyBlue" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(700, 0)
+
+[node name="ColorRect" type="ColorRect" parent="ParallaxBackground/SkyBlue"]
+offset_right = 700.0
+offset_bottom = 700.0
+color = Color(0.333333, 0.866667, 1, 1)
+
+[node name="Ground" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(700, 0)
+
+[node name="ColorRect" type="ColorRect" parent="ParallaxBackground/Ground"]
+offset_top = 610.0
+offset_right = 700.0
+offset_bottom = 700.0
+color = Color(0.509804, 0.509804, 0.45098, 1)
+
+[node name="Grass" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.9, 0.9)
+motion_mirroring = Vector2(700, 0)
+
+[node name="Grass" type="Sprite2D" parent="ParallaxBackground/Grass"]
+position = Vector2(0, 571)
+texture = ExtResource("2_k2p6x")
+centered = false
+
+[node name="Grass2" type="Sprite2D" parent="ParallaxBackground/Grass"]
+position = Vector2(100, 571)
+texture = ExtResource("2_k2p6x")
+centered = false
+
+[node name="Grass3" type="Sprite2D" parent="ParallaxBackground/Grass"]
+position = Vector2(200, 571)
+texture = ExtResource("2_k2p6x")
+centered = false
+
+[node name="Grass4" type="Sprite2D" parent="ParallaxBackground/Grass"]
+position = Vector2(300, 571)
+texture = ExtResource("2_k2p6x")
+centered = false
+
+[node name="Grass5" type="Sprite2D" parent="ParallaxBackground/Grass"]
+position = Vector2(400, 571)
+texture = ExtResource("2_k2p6x")
+centered = false
+
+[node name="Grass6" type="Sprite2D" parent="ParallaxBackground/Grass"]
+position = Vector2(500, 571)
+texture = ExtResource("2_k2p6x")
+centered = false
+
+[node name="Grass7" type="Sprite2D" parent="ParallaxBackground/Grass"]
+position = Vector2(600, 571)
+texture = ExtResource("2_k2p6x")
+centered = false
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.2, 0.2)
+motion_mirroring = Vector2(700, 0)
+
+[node name="Cloud1" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2(564, 168)
+scale = Vector2(5, 5)
+texture = ExtResource("2_6uipm")
 
 [node name="Man" parent="." instance=ExtResource("2_fpxae")]
 position = Vector2(90, 319)
@@ -30,6 +99,7 @@ shape = SubResource("RectangleShape2D_ic0t3")
 [node name="ColorRect" type="ColorRect" parent="Package"]
 offset_right = 75.0
 offset_bottom = 74.0
+color = Color(0.537255, 0.368627, 0.254902, 1)
 
 [node name="Ground" type="StaticBody2D" parent="."]
 position = Vector2(572, 625)
@@ -40,3 +110,7 @@ script = ExtResource("3_ddgqr")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
 position = Vector2(3, -8)
 shape = SubResource("RectangleShape2D_rys32")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(350, 350)
+position_smoothing_enabled = true

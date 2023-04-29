@@ -15,6 +15,11 @@ run/main_scene="res://test_level.tscn"
 config/features=PackedStringArray("4.0", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[display]
+
+window/size/viewport_width=700
+window/size/viewport_height=700
+
 [input]
 
 kick={
