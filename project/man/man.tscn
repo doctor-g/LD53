@@ -1,10 +1,13 @@
-[gd_scene load_steps=10 format=3 uid="uid://darq8ocldvh5a"]
+[gd_scene load_steps=13 format=3 uid="uid://darq8ocldvh5a"]
 
 [ext_resource type="Script" path="res://man/man.gd" id="1_352em"]
 [ext_resource type="Texture2D" uid="uid://c5665wjan5n2v" path="res://man/lower.png" id="2_e3kca"]
 [ext_resource type="Texture2D" uid="uid://b6tixluwfc52p" path="res://man/kicking_leg.png" id="2_uqefx"]
 [ext_resource type="Texture2D" uid="uid://p668kh236j6u" path="res://man/upper.png" id="4_ynupq"]
+[ext_resource type="Texture2D" uid="uid://rxng7nc84oit" path="res://man/grin.png" id="5_f0kyj"]
 [ext_resource type="PackedScene" uid="uid://778cs5wasnjt" path="res://man/eye.tscn" id="5_jdjey"]
+[ext_resource type="Texture2D" uid="uid://lfkeld2jci5t" path="res://man/ooh.png" id="6_20gjt"]
+[ext_resource type="Texture2D" uid="uid://c1qypehm7is4i" path="res://man/disappoint.png" id="8_xaukw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wu1ok"]
 size = Vector2(123, 324)
@@ -74,3 +77,20 @@ position = Vector2(71, -235)
 
 [node name="RightEye" parent="." instance=ExtResource("5_jdjey")]
 position = Vector2(25, -239)
+
+[node name="MouthGrin" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(35, -205)
+texture = ExtResource("5_f0kyj")
+
+[node name="MouthOoh" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+visible = false
+position = Vector2(57, -202)
+texture = ExtResource("6_20gjt")
+
+[node name="MouthDisappoint" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+visible = false
+position = Vector2(40, -200)
+texture = ExtResource("8_xaukw")

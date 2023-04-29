@@ -58,6 +58,7 @@ func _on_package_sleeping_state_changed()->void:
 		
 		if meters < 1:
 			$Sad.play()
+			$Man.show_disappointment()
 		else:
 			$Polka.play()
 
