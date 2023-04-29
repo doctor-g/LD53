@@ -5,4 +5,3 @@ extends StaticBody2D
 func _draw():
 	var rect := Rect2(-_shape.size.x/2, -_shape.size.y/2, _shape.size.x, _shape.size.y)
 	draw_rect(rect, Color.DARK_GREEN)
-	print("Drawn at ", rect)
