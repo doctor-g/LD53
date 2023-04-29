@@ -1,10 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://bxtb2od64t4pc"]
+[gd_scene load_steps=11 format=3 uid="uid://bxtb2od64t4pc"]
 
 [ext_resource type="Script" path="res://test_level.gd" id="1_82nyy"]
 [ext_resource type="Texture2D" uid="uid://3aug1fw5oyqe" path="res://background/cloud1.png" id="2_6uipm"]
 [ext_resource type="PackedScene" uid="uid://darq8ocldvh5a" path="res://man/man.tscn" id="2_fpxae"]
 [ext_resource type="Texture2D" uid="uid://cfbybusxf248p" path="res://background/grass.png" id="2_k2p6x"]
-[ext_resource type="Script" path="res://ground.gd" id="3_ddgqr"]
 [ext_resource type="PackedScene" uid="uid://chpulnid3nuyd" path="res://package/package.tscn" id="5_oywqs"]
 [ext_resource type="FontFile" uid="uid://dh5xmq1a0k42x" path="res://ui/LuckiestGuy-Regular.ttf" id="6_x3gg8"]
 [ext_resource type="AudioStream" uid="uid://dopa0u4aucnwq" path="res://suspense.ogg" id="8_7pi8j"]
@@ -41,37 +40,37 @@ motion_scale = Vector2(0.9, 0.9)
 motion_mirroring = Vector2(700, 0)
 
 [node name="Grass" type="Sprite2D" parent="ParallaxBackground/Grass"]
-position = Vector2(0, 571)
+position = Vector2(0, 575)
 texture = ExtResource("2_k2p6x")
 centered = false
 
 [node name="Grass2" type="Sprite2D" parent="ParallaxBackground/Grass"]
-position = Vector2(100, 571)
+position = Vector2(100, 575)
 texture = ExtResource("2_k2p6x")
 centered = false
 
 [node name="Grass3" type="Sprite2D" parent="ParallaxBackground/Grass"]
-position = Vector2(200, 571)
+position = Vector2(200, 575)
 texture = ExtResource("2_k2p6x")
 centered = false
 
 [node name="Grass4" type="Sprite2D" parent="ParallaxBackground/Grass"]
-position = Vector2(300, 571)
+position = Vector2(300, 575)
 texture = ExtResource("2_k2p6x")
 centered = false
 
 [node name="Grass5" type="Sprite2D" parent="ParallaxBackground/Grass"]
-position = Vector2(400, 571)
+position = Vector2(400, 575)
 texture = ExtResource("2_k2p6x")
 centered = false
 
 [node name="Grass6" type="Sprite2D" parent="ParallaxBackground/Grass"]
-position = Vector2(500, 571)
+position = Vector2(500, 575)
 texture = ExtResource("2_k2p6x")
 centered = false
 
 [node name="Grass7" type="Sprite2D" parent="ParallaxBackground/Grass"]
-position = Vector2(600, 571)
+position = Vector2(600, 575)
 texture = ExtResource("2_k2p6x")
 centered = false
 
@@ -93,10 +92,9 @@ position = Vector2(90, 319)
 position = Vector2(572, 625)
 collision_layer = 8
 collision_mask = 4
-script = ExtResource("3_ddgqr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
-position = Vector2(3, -8)
+position = Vector2(3, -5)
 shape = SubResource("RectangleShape2D_rys32")
 
 [node name="Camera2D" type="Camera2D" parent="."]
