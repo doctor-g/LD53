@@ -2,6 +2,8 @@ extends StaticBody2D
 
 const _KICK_FORCE := 5000
 
+@export var object : Node2D
+
 @export_group("Debugging")
 @export var draw_impulse := false
 
@@ -9,6 +11,11 @@ const _KICK_FORCE := 5000
 
 var _impulse : Vector2
 var _at : Vector2
+
+func _ready():
+	$LeftEye.object = object
+	$RightEye.object = object
+
 
 func _physics_process(_delta):
 	if Input.is_action_just_pressed("kick"):

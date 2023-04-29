@@ -6,7 +6,7 @@
 size = Vector2(76, 73)
 
 [node name="Package" type="RigidBody2D"]
-position = Vector2(276, 193)
+position = Vector2(-36, -33)
 collision_layer = 4
 collision_mask = 13
 mass = 0.5

@@ -83,10 +83,12 @@ position = Vector2(564, 168)
 scale = Vector2(5, 5)
 texture = ExtResource("2_6uipm")
 
-[node name="Man" parent="." instance=ExtResource("2_fpxae")]
+[node name="Man" parent="." node_paths=PackedStringArray("object") instance=ExtResource("2_fpxae")]
 position = Vector2(90, 319)
+object = NodePath("../Package")
 
 [node name="Package" parent="." instance=ExtResource("5_oywqs")]
+position = Vector2(266, 185)
 
 [node name="Ground" type="StaticBody2D" parent="."]
 position = Vector2(572, 625)
