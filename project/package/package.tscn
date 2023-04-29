@@ -24,4 +24,6 @@ offset_right = 75.0
 offset_bottom = 74.0
 color = Color(0.537255, 0.368627, 0.254902, 1)
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="GlassSound" type="AudioStreamPlayer" parent="."]
+
+[node name="HitSound" type="AudioStreamPlayer" parent="."]
