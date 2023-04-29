@@ -1,5 +1,7 @@
 extends RigidBody2D
 
+signal hit
+
 const _HIT_SOUNDS := [
 	preload("res://package/glass1.wav"), 
 	preload("res://package/glass2.wav"), 
@@ -17,6 +19,7 @@ func _physics_process(_delta):
 		if not _was_hit:
 			_was_hit = true
 			_play_hit_sound()
+			hit.emit()
 	else:
 		if _was_hit:
 			_was_hit = false

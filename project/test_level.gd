@@ -24,6 +24,8 @@ func _ready():
 	_tween.tween_property(_package, "position", _package.position-Vector2(30,0), 1.0).set_trans(Tween.TRANS_CUBIC)	
 	_tween.set_ease(Tween.EASE_IN_OUT)
 	_tween.set_loops()
+	
+	_package.hit.connect(_on_package_hit)
 
 
 func _physics_process(delta:float):
@@ -49,6 +51,8 @@ func _physics_process(delta:float):
 
 func _on_package_sleeping_state_changed()->void:
 	if _package.sleeping:
+		$Polka.play()
+		
 		var pixel_distance := _package.global_position.x - _man.global_position.x
 		var meters := pixel_distance / _pixels_per_meter
 		%ScoreLabel.text = "Distance:\n%.2fm" % meters
@@ -60,3 +64,8 @@ func _on_package_sleeping_state_changed()->void:
 
 func _on_play_again_button_pressed():
 	get_tree().change_scene_to_file("res://test_level.tscn")
+
+
+func _on_package_hit()->void:
+	$Suspense.stop()
+	_package.hit.disconnect(_on_package_hit)

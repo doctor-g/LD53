@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bxtb2od64t4pc"]
+[gd_scene load_steps=11 format=3 uid="uid://bxtb2od64t4pc"]
 
 [ext_resource type="Script" path="res://test_level.gd" id="1_82nyy"]
 [ext_resource type="Texture2D" uid="uid://3aug1fw5oyqe" path="res://background/cloud1.png" id="2_6uipm"]
@@ -7,6 +7,8 @@
 [ext_resource type="Script" path="res://ground.gd" id="3_ddgqr"]
 [ext_resource type="PackedScene" uid="uid://chpulnid3nuyd" path="res://package/package.tscn" id="5_oywqs"]
 [ext_resource type="FontFile" uid="uid://dh5xmq1a0k42x" path="res://ui/LuckiestGuy-Regular.ttf" id="6_x3gg8"]
+[ext_resource type="AudioStream" uid="uid://dopa0u4aucnwq" path="res://suspense.ogg" id="8_7pi8j"]
+[ext_resource type="AudioStream" uid="uid://chlwsejdsr7ge" path="res://theme.ogg" id="9_xfsca"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rys32"]
 size = Vector2(3000, 20)
@@ -133,5 +135,12 @@ offset_right = 55.5
 grow_horizontal = 2
 grow_vertical = 0
 text = "Deliver Again"
+
+[node name="Suspense" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_7pi8j")
+autoplay = true
+
+[node name="Polka" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_xfsca")
 
 [connection signal="pressed" from="ScoreFeedbackLayer/PlayAgainButton" to="." method="_on_play_again_button_pressed"]
