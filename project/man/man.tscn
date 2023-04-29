@@ -1,0 +1,64 @@
+[gd_scene load_steps=8 format=3 uid="uid://darq8ocldvh5a"]
+
+[ext_resource type="Script" path="res://man/man.gd" id="1_352em"]
+[ext_resource type="Texture2D" uid="uid://b6tixluwfc52p" path="res://man/kicking_leg.png" id="2_uqefx"]
+[ext_resource type="Texture2D" uid="uid://b1q15kh2flon1" path="res://man/static_part.png" id="3_mowxe"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2fkcw"]
+size = Vector2(70, 274)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ommkx"]
+size = Vector2(126, 34)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wu1ok"]
+size = Vector2(123, 324)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rfg6y"]
+
+[node name="Man" type="StaticBody2D"]
+position = Vector2(-20, -289)
+script = ExtResource("1_352em")
+
+[node name="Leg" type="RigidBody2D" parent="."]
+collision_mask = 7
+mass = 12.0
+
+[node name="KickingLeg" type="Sprite2D" parent="Leg"]
+position = Vector2(31, 137)
+texture = ExtResource("2_uqefx")
+
+[node name="LegCollision" type="CollisionShape2D" parent="Leg"]
+position = Vector2(14, 125)
+shape = SubResource("RectangleShape2D_2fkcw")
+
+[node name="FootCollision" type="CollisionShape2D" parent="Leg"]
+position = Vector2(32, 270)
+shape = SubResource("RectangleShape2D_ommkx")
+
+[node name="StaticPart" type="Sprite2D" parent="."]
+position = Vector2(30, -5)
+texture = ExtResource("3_mowxe")
+
+[node name="TorsoCollision" type="CollisionShape2D" parent="."]
+position = Vector2(27.5, -135)
+shape = SubResource("RectangleShape2D_wu1ok")
+
+[node name="HipJoint" type="PinJoint2D" parent="."]
+node_a = NodePath("..")
+node_b = NodePath("../Leg")
+
+[node name="RightLegLimiter" type="StaticBody2D" parent="."]
+position = Vector2(135, -36)
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightLegLimiter"]
+shape = SubResource("CircleShape2D_rfg6y")
+metadata/_edit_lock_ = true
+
+[node name="LeftLegLimiter" type="StaticBody2D" parent="."]
+position = Vector2(-91, 17)
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftLegLimiter"]
+shape = SubResource("CircleShape2D_rfg6y")
+metadata/_edit_lock_ = true

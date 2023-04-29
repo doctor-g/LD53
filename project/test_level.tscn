@@ -1,11 +1,11 @@
 [gd_scene load_steps=6 format=3 uid="uid://bf3oxvy6rn7jn"]
 
 [ext_resource type="Script" path="res://test_level.gd" id="1_82nyy"]
-[ext_resource type="PackedScene" uid="uid://bbrdaqctans4l" path="res://man.tscn" id="2_vkguy"]
+[ext_resource type="PackedScene" uid="uid://darq8ocldvh5a" path="res://man/man.tscn" id="2_fpxae"]
 [ext_resource type="Script" path="res://ground.gd" id="3_ddgqr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ic0t3"]
-size = Vector2(40, 40)
+size = Vector2(76, 73)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rys32"]
 size = Vector2(3000, 20)
@@ -13,22 +13,22 @@ size = Vector2(3000, 20)
 [node name="TestLevel" type="Node2D"]
 script = ExtResource("1_82nyy")
 
-[node name="Man" parent="." instance=ExtResource("2_vkguy")]
-position = Vector2(91, 469)
+[node name="Man" parent="." instance=ExtResource("2_fpxae")]
+position = Vector2(90, 319)
 
 [node name="Package" type="RigidBody2D" parent="."]
-position = Vector2(185, 386)
+position = Vector2(276, 193)
 collision_layer = 4
 collision_mask = 13
 freeze = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Package"]
-position = Vector2(20, 20)
+position = Vector2(38, 36.5)
 shape = SubResource("RectangleShape2D_ic0t3")
 
 [node name="ColorRect" type="ColorRect" parent="Package"]
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 75.0
+offset_bottom = 74.0
 
 [node name="Ground" type="StaticBody2D" parent="."]
 position = Vector2(572, 625)

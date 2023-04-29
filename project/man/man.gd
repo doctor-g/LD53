@@ -5,7 +5,7 @@ const _KICK_FORCE := 5000
 @export_group("Debugging")
 @export var draw_impulse := false
 
-@onready var _foot := $Leg/ColorRect2
+@onready var _foot := $Leg/FootCollision
 
 var _impulse : Vector2
 var _at : Vector2
