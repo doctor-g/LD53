@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://dckgtaf01wjd0"]
+[gd_scene load_steps=11 format=3 uid="uid://dckgtaf01wjd0"]
 
 [ext_resource type="Theme" uid="uid://8bbcnyenvknh" path="res://ui/theme.tres" id="1_vjk3s"]
 [ext_resource type="Script" path="res://ui/title_screen.gd" id="2_05dc8"]
 [ext_resource type="PackedScene" uid="uid://bnu64hhposbdx" path="res://ui/audible_button.tscn" id="3_yecsf"]
 [ext_resource type="Texture2D" uid="uid://cq6gi0ceog2xq" path="res://ui/face_promo.png" id="4_vkdmi"]
 [ext_resource type="AudioStream" uid="uid://dh57t7svl4n1c" path="res://ui/chipper_theme.ogg" id="5_wqa04"]
+[ext_resource type="Script" path="res://ui/achievements_popup.gd" id="6_47483"]
 
 [sub_resource type="Animation" id="Animation_a2hq2"]
 length = 0.001
@@ -33,21 +34,6 @@ tracks/1/keys = {
 "values": [0.0]
 }
 
-[sub_resource type="Animation" id="Animation_15oee"]
-resource_name = "move_camera_down"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Camera2D:offset")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.8),
-"transitions": PackedFloat32Array(2.46229, 2.46229),
-"update": 0,
-"values": [Vector2(350, 350), Vector2(350, 1050)]
-}
-
 [sub_resource type="Animation" id="Animation_1n7c3"]
 resource_name = "head_bobble"
 length = 1.6
@@ -63,6 +49,21 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [0.0, -0.261799, 0.261799, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_15oee"]
+resource_name = "move_camera_down"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera2D:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(2.46229, 2.46229),
+"update": 0,
+"values": [Vector2(350, 350), Vector2(350, 1050)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3fdef"]
@@ -107,13 +108,22 @@ theme_override_constants/outline_size = 15
 theme_override_font_sizes/font_size = 64
 text = "Mr. Delivery Man"
 
-[node name="PlayButton" parent="." instance=ExtResource("3_yecsf")]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 0
-offset_left = 146.0
-offset_top = 1191.0
-offset_right = 575.0
-offset_bottom = 1248.0
+offset_left = 114.0
+offset_top = 1077.0
+offset_right = 589.0
+offset_bottom = 1215.0
+theme_override_constants/separation = 24
+
+[node name="PlayButton" parent="VBoxContainer" instance=ExtResource("3_yecsf")]
+layout_mode = 2
 text = "Deliver a Package"
+
+[node name="AchievementsButton" parent="VBoxContainer" instance=ExtResource("3_yecsf")]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Achievements (N/X)"
 
 [node name="SillyJamGame" type="Label" parent="."]
 layout_mode = 1
@@ -183,4 +193,51 @@ offset = Vector2(0, -100)
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_wqa04")
 
-[connection signal="pressed" from="PlayButton" to="." method="_on_play_button_pressed"]
+[node name="AchievementsPopup" type="Popup" parent="."]
+position = Vector2i(25, 725)
+size = Vector2i(650, 650)
+script = ExtResource("6_47483")
+
+[node name="Control" type="Control" parent="AchievementsPopup"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="AchievementsPopup/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Heading" type="Label" parent="AchievementsPopup/Control/VBoxContainer"]
+layout_mode = 2
+text = "Achievements:"
+horizontal_alignment = 1
+
+[node name="AchievementsList" type="VBoxContainer" parent="AchievementsPopup/Control/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="OkButton" parent="AchievementsPopup/Control" instance=ExtResource("3_yecsf")]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -34.0
+offset_top = -57.0
+offset_right = 34.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "OK"
+
+[connection signal="pressed" from="VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/AchievementsButton" to="." method="_on_achievements_button_pressed"]
+[connection signal="pressed" from="AchievementsPopup/Control/OkButton" to="AchievementsPopup" method="_on_ok_button_pressed"]

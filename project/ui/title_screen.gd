@@ -5,6 +5,11 @@ func _ready():
 		Globals.show_splash = false
 		$Camera2D.offset.y += 700
 		$Music.play()
+	
+	%AchievementsButton.text = "Achievements (%d/%d)" % [
+			AchievementPortfolio.count_earned(), 
+			AchievementPortfolio.CATALOG.size(),
+	]
 
 
 func _input(event):
@@ -16,3 +21,7 @@ func _input(event):
 
 func _on_play_button_pressed():
 	get_tree().change_scene_to_file("res://test_level.tscn")
+
+
+func _on_achievements_button_pressed():
+	$AchievementsPopup.popup_centered()

@@ -11,6 +11,9 @@ var _dropped := false
 ## Effectively a constant but calculated from the physics settings
 var _pixels_per_meter :float = ProjectSettings.get_setting("physics/2d/default_gravity") / 9.8
 
+## A record of what happened this game
+var _record := GameRecord.new()
+
 @onready var _man :Node2D = $Man
 @onready var _package :RigidBody2D = $Package
 @onready var _camera := $Camera2D
@@ -53,30 +56,49 @@ func _drop_package():
 
 func _on_package_sleeping_state_changed()->void:
 	if _package.sleeping:
-		var pixel_distance := _package.global_position.x - _man.global_position.x
-		var meters := pixel_distance / _pixels_per_meter
-		%ScoreLabel.text = "Distance:\n%.2fm" % meters
-		
-		%ActionControls.visible = false
-		%GameOverControls.visible = true
-		
-		_package.sleeping_state_changed.disconnect(_on_package_sleeping_state_changed)
-		
-		if meters < 1:
-			$Sad.play()
-			$Man.show_disappointment()
-		else:
-			$Polka.play()
-			$Man.show_grin()
+		_end_round()
+
+
+func _end_round()->void:
+	var pixel_distance := _package.global_position.x - _man.global_position.x
+	var meters := pixel_distance / _pixels_per_meter
+	%ScoreLabel.text = "Distance:\n%.2fm" % meters
+	%ScoreLabel.visible = true
+	
+	%ActionControls.visible = false
+	%GameOverControls.visible = true
+	
+	_package.sleeping_state_changed.disconnect(_on_package_sleeping_state_changed)
+	
+	if meters < 1:
+		$Sad.play()
+		$Man.show_disappointment()
+	else:
+		$Polka.play()
+		$Man.show_grin()
+	
+	_record.ending_height = ($Ground.global_position.y - _package.global_position.y) / _pixels_per_meter
+	_record.highest = ($Ground.global_position.y - _package.get_highest_y()) / _pixels_per_meter
+	_record.distance = meters
+	
+	var earned_achievements := AchievementPortfolio.find_earned_achievements(_record)
+	if not earned_achievements.is_empty():
+		var achievement := earned_achievements[0]
+		AchievementPortfolio.add(achievement)
+		%AchievementArea.visible = true
+		%AchievementName.text = achievement.name
 
 
 func _on_play_again_button_pressed():
 	get_tree().change_scene_to_file("res://test_level.tscn")
 
 
-func _on_package_hit()->void:
+func _on_package_hit(body:PhysicsBody2D)->void:
 	$Suspense.stop()
 	_package.hit.disconnect(_on_package_hit)
+	
+	if body != $Ground:
+		_record.made_contact = true
 
 
 func _on_main_menu_button_pressed():

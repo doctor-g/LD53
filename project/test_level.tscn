@@ -13,7 +13,7 @@
 [ext_resource type="AudioStream" uid="uid://domfcc5i7k0t3" path="res://sad.ogg" id="10_5jmop"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rys32"]
-size = Vector2(3000, 20)
+size = Vector2(10000, 20)
 
 [node name="TestLevel" type="Node2D"]
 script = ExtResource("1_82nyy")
@@ -90,7 +90,7 @@ position = Vector2(90, 319)
 object = NodePath("../Package")
 
 [node name="Package" parent="." instance=ExtResource("5_oywqs")]
-position = Vector2(266, 185)
+position = Vector2(266, 178)
 
 [node name="Ground" type="StaticBody2D" parent="."]
 position = Vector2(572, 625)
@@ -141,6 +141,7 @@ text = "Kick"
 
 [node name="ScoreLabel" type="Label" parent="UiLayer/Control"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -156,6 +157,29 @@ theme_override_constants/outline_size = 10
 theme_override_fonts/font = ExtResource("6_x3gg8")
 theme_override_font_sizes/font_size = 72
 text = "Distance: "
+horizontal_alignment = 1
+
+[node name="AchievementArea" type="VBoxContainer" parent="UiLayer/Control"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -169.0
+offset_top = 300.0
+offset_right = 169.0
+offset_bottom = 376.0
+grow_horizontal = 2
+
+[node name="FixedText" type="Label" parent="UiLayer/Control/AchievementArea"]
+layout_mode = 2
+text = "Achievement Earned:"
+
+[node name="AchievementName" type="Label" parent="UiLayer/Control/AchievementArea"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "[Achievement]"
 horizontal_alignment = 1
 
 [node name="GameOverControls" type="HBoxContainer" parent="UiLayer/Control"]
