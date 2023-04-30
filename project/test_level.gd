@@ -67,6 +67,7 @@ func _on_package_sleeping_state_changed()->void:
 			$Man.show_disappointment()
 		else:
 			$Polka.play()
+			$Man.show_grin()
 
 
 func _on_play_again_button_pressed():
