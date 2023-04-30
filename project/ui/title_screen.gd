@@ -8,12 +8,11 @@ func _ready():
 
 
 func _on_play_button_button_down():
-	%ClickSound.play()
+	Sfx.play_click_sound()
 
 
 func _on_play_button_button_up():
-	%ClickSound.play()
-	await %ClickSound.finished
+	Sfx.play_click_sound()
 	get_tree().change_scene_to_file("res://test_level.tscn")
 
 
