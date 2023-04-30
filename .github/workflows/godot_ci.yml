@@ -15,7 +15,7 @@ on:
 
 jobs:
   deploy:
-    runs-on: ubuntu-current
+    runs-on: ubuntu-latest
 
     container:
       image: barichello/godot-ci:4.0.2
