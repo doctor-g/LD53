@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://bnu64hhposbdx"]
+
+[ext_resource type="Script" path="res://ui/audible_button.gd" id="1_tah2w"]
+
+[node name="AudibleButton" type="Button"]
+script = ExtResource("1_tah2w")
+
+[connection signal="button_down" from="." to="." method="_on_button_down"]
+[connection signal="button_up" from="." to="." method="_on_button_up"]

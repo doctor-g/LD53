@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://dckgtaf01wjd0"]
+[gd_scene load_steps=9 format=3 uid="uid://dckgtaf01wjd0"]
 
 [ext_resource type="Theme" uid="uid://8bbcnyenvknh" path="res://ui/theme.tres" id="1_vjk3s"]
 [ext_resource type="Script" path="res://ui/title_screen.gd" id="2_05dc8"]
+[ext_resource type="PackedScene" uid="uid://bnu64hhposbdx" path="res://ui/audible_button.tscn" id="3_yecsf"]
 [ext_resource type="Texture2D" uid="uid://cq6gi0ceog2xq" path="res://ui/face_promo.png" id="4_vkdmi"]
 [ext_resource type="AudioStream" uid="uid://435tnx0725ex" path="res://ui/blues.ogg" id="5_wpcwo"]
 
@@ -76,20 +77,12 @@ theme_override_constants/outline_size = 15
 theme_override_font_sizes/font_size = 64
 text = "Mr. Delivery Man"
 
-[node name="PlayButton" type="Button" parent="."]
-unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -281.0
-offset_top = 447.0
-offset_right = 291.0
-offset_bottom = 519.0
-grow_horizontal = 2
-grow_vertical = 0
+[node name="PlayButton" parent="." instance=ExtResource("3_yecsf")]
+layout_mode = 0
+offset_left = 146.0
+offset_top = 1191.0
+offset_right = 575.0
+offset_bottom = 1248.0
 text = "Deliver a Package"
 
 [node name="SillyJamGame" type="Label" parent="."]
@@ -158,5 +151,4 @@ texture = ExtResource("4_vkdmi")
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_wpcwo")
 
-[connection signal="button_down" from="PlayButton" to="." method="_on_play_button_button_down"]
-[connection signal="button_up" from="PlayButton" to="." method="_on_play_button_button_up"]
+[connection signal="pressed" from="PlayButton" to="." method="_on_play_button_pressed"]
