@@ -11,23 +11,25 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    permissions: write-all
+
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-
-      - uses: chickensoft-games/setup-godot@v1.5.4
-       	with:
-	        version: 4.0.2
-	        use-dotnet: false
 
       - name: Create staging directory
         run: mkdir -v -p build/web
 
       - name: Build
-        run: godot -v --export-release "Web" ../build/web/index.html project/project.godot
+        uses: firebelley/godot-export@v5.1.0
+        with:
+          godot_executable_download_url: https://downloads.tuxfamily.org/godotengine/4.0.2/Godot_v4.0.2-stable_linux.x86_64.zip
+          godot_export_templates_download_url: https://downloads.tuxfamily.org/godotengine/4.0.2/Godot_v4.0.2-stable_export_templates.tpz
+          relative_project_path: ./project
+          use_preset_export_path: true
 
       - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@v3.9.3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./build/web
