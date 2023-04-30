@@ -27,12 +27,7 @@ func _ready():
 
 func _physics_process(_delta):
 	if Input.is_action_just_pressed("kick"):
-		var impulse := Vector2(_KICK_FORCE, 0).rotated(_foot.get_global_transform().get_rotation())
-		_impulse = impulse
-		_at = _foot.global_position - global_position
-		$Leg.apply_impulse(impulse, _at)
-		
-		queue_redraw()
+		kick()
 	
 	if not _detected_high_kick and object.global_position.y < $LeftEye.global_position.y:
 		show_excitement()
@@ -43,6 +38,14 @@ func _draw():
 	if draw_impulse:
 		draw_line(_at, _impulse, Color.BLACK, 5)
 	
+	
+func kick()->void:
+	var impulse := Vector2(_KICK_FORCE, 0).rotated(_foot.get_global_transform().get_rotation())
+	_impulse = impulse
+	_at = _foot.global_position - global_position
+	$Leg.apply_impulse(impulse, _at)
+	queue_redraw()
+
 
 func show_grin()->void:
 	_show_mouth(%MouthGrin)

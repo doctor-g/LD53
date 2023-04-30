@@ -25,25 +25,30 @@ func _ready():
 	_package.hit.connect(_on_package_hit)
 
 
-func _physics_process(delta:float):
+func _physics_process(_delta:float):
 	if _dropped:
 		_camera.global_position.x = max(_CAMERA_MIN_X, _package.global_position.x)
 	
 	if not _dropped and Input.is_action_just_pressed("drop"):
-		_dropped = true
-		_tween.stop()
-		_package.freeze = false
-		
-		# Apply impulse in the direction the package is moving from the tween.
-		var speed := _package.global_position - _previous_pos
-		var momentum := speed * (_package.mass as float) / delta
-		_package.apply_impulse(momentum)
-		
-		# Watch for the package to come to rest
-		_package.sleeping_state_changed.connect(_on_package_sleeping_state_changed)
+		_drop_package()
 
 	# Track position so that momentum can be computed
 	_previous_pos = _package.global_position
+
+
+func _drop_package():
+	%DropButton.disabled = true
+	_dropped = true
+	_tween.stop()
+	_package.freeze = false
+		
+	# Apply impulse in the direction the package is moving from the tween.
+	var speed := _package.global_position - _previous_pos
+	var momentum := speed * (_package.mass as float) / (1.0/60.0)#delta
+	_package.apply_impulse(momentum)
+	
+	# Watch for the package to come to rest
+	_package.sleeping_state_changed.connect(_on_package_sleeping_state_changed)
 
 
 func _on_package_sleeping_state_changed()->void:
@@ -52,7 +57,8 @@ func _on_package_sleeping_state_changed()->void:
 		var meters := pixel_distance / _pixels_per_meter
 		%ScoreLabel.text = "Distance:\n%.2fm" % meters
 		
-		%ScoreFeedbackLayer.visible=true
+		%ActionControls.visible = false
+		%GameOverControls.visible = true
 		
 		_package.sleeping_state_changed.disconnect(_on_package_sleeping_state_changed)
 		
@@ -74,3 +80,11 @@ func _on_package_hit()->void:
 
 func _on_main_menu_button_pressed():
 	get_tree().change_scene_to_file("res://ui/title_screen.tscn")
+
+
+func _on_drop_button_pressed():
+	_drop_package()
+
+
+func _on_kick_pressed():
+	_man.kick()

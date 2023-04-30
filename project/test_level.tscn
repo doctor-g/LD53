@@ -105,11 +105,10 @@ shape = SubResource("RectangleShape2D_rys32")
 position = Vector2(350, 350)
 position_smoothing_enabled = true
 
-[node name="ScoreFeedbackLayer" type="CanvasLayer" parent="."]
+[node name="UiLayer" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
-visible = false
 
-[node name="Control" type="Control" parent="ScoreFeedbackLayer"]
+[node name="Control" type="Control" parent="UiLayer"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -118,7 +117,29 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("6_afsik")
 
-[node name="ScoreLabel" type="Label" parent="ScoreFeedbackLayer/Control"]
+[node name="ActionControls" type="VBoxContainer" parent="UiLayer/Control"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -162.0
+offset_right = -37.0
+grow_horizontal = 0
+grow_vertical = 2
+alignment = 1
+
+[node name="DropButton" type="Button" parent="UiLayer/Control/ActionControls"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Drop"
+
+[node name="Kick" type="Button" parent="UiLayer/Control/ActionControls"]
+layout_mode = 2
+text = "Kick"
+
+[node name="ScoreLabel" type="Label" parent="UiLayer/Control"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 5
@@ -137,7 +158,9 @@ theme_override_font_sizes/font_size = 72
 text = "Distance: "
 horizontal_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ScoreFeedbackLayer/Control"]
+[node name="GameOverControls" type="HBoxContainer" parent="UiLayer/Control"]
+unique_name_in_owner = true
+visible = false
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -149,11 +172,11 @@ grow_vertical = 0
 theme_override_constants/separation = 50
 alignment = 1
 
-[node name="PlayAgainButton" parent="ScoreFeedbackLayer/Control/HBoxContainer" instance=ExtResource("8_71nor")]
+[node name="PlayAgainButton" parent="UiLayer/Control/GameOverControls" instance=ExtResource("8_71nor")]
 layout_mode = 2
 text = "Play Again"
 
-[node name="MainMenuButton" parent="ScoreFeedbackLayer/Control/HBoxContainer" instance=ExtResource("8_71nor")]
+[node name="MainMenuButton" parent="UiLayer/Control/GameOverControls" instance=ExtResource("8_71nor")]
 layout_mode = 2
 text = "Main Menu"
 
@@ -167,5 +190,7 @@ stream = ExtResource("9_xfsca")
 [node name="Sad" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("10_5jmop")
 
-[connection signal="pressed" from="ScoreFeedbackLayer/Control/HBoxContainer/PlayAgainButton" to="." method="_on_play_again_button_pressed"]
-[connection signal="pressed" from="ScoreFeedbackLayer/Control/HBoxContainer/MainMenuButton" to="." method="_on_main_menu_button_pressed"]
+[connection signal="pressed" from="UiLayer/Control/ActionControls/DropButton" to="." method="_on_drop_button_pressed"]
+[connection signal="pressed" from="UiLayer/Control/ActionControls/Kick" to="." method="_on_kick_pressed"]
+[connection signal="pressed" from="UiLayer/Control/GameOverControls/PlayAgainButton" to="." method="_on_play_again_button_pressed"]
+[connection signal="pressed" from="UiLayer/Control/GameOverControls/MainMenuButton" to="." method="_on_main_menu_button_pressed"]
