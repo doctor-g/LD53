@@ -70,3 +70,7 @@ func _on_play_again_button_pressed():
 func _on_package_hit()->void:
 	$Suspense.stop()
 	_package.hit.disconnect(_on_package_hit)
+
+
+func _on_main_menu_button_pressed():
+	get_tree().change_scene_to_file("res://ui/title_screen.tscn")

@@ -1,10 +1,10 @@
 extends Control
 
-var _advanced := false
-
 func _ready():
-	if OS.get_name()!="Web":
+	if not Globals.show_splash or OS.get_name()!="Web":
+		Globals.show_splash = false
 		$Camera2D.offset.y += 700
+		$Music.play()
 
 
 func _on_play_button_button_down():
@@ -18,6 +18,7 @@ func _on_play_button_button_up():
 
 
 func _input(event):
-	if not _advanced and event is InputEventMouseButton and event.is_pressed():
-		_advanced=true
+	if Globals.show_splash and event is InputEventMouseButton and event.is_pressed():
+		Globals.show_splash = false
 		$AnimationPlayer.play("move_camera_down")
+		$Music.play()
